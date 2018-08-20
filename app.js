@@ -12,7 +12,7 @@ const Application = asch.Application
 function main() {
   process.stdin.resume()
 
-  const version = '1.4.2'
+  const version = '1.0.0'
   program
     .version(version)
     .option('-c, --config <path>', 'Config file path')
@@ -79,24 +79,6 @@ function main() {
       })
     } else {
       appConfig.peers.list = []
-    }
-  }
-
-  if (appConfig.netVersion === 'mainnet') {
-    const seeds = [
-      757137132,
-      1815983436,
-      759980934,
-      759980683,
-      1807690192,
-      1758431015,
-      1760474482,
-      1760474149,
-      759110497,
-      757134616,
-    ]
-    for (let i = 0; i < seeds.length; ++i) {
-      appConfig.peers.list.push({ ip: ip.fromLong(seeds[i]), port: 81 })
     }
   }
 

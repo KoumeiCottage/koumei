@@ -1,14 +1,14 @@
 {
-  "name": "asch",
-  "version": "1.4.3",
+  "name": "koumei",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "node app.js",
     "test": "jest"
   },
-  "author": "Qingfeng Shan <sqf1225@foxmail.com>",
+  "author": "koumei.io",
   "dependencies": {
-    "asch-core": "https://github.com/AschPlatform/asch-core/tarball/v1.4.3",
+    "asch-core": "https://github.com/KoumeiCottage/koumei-core/tarball/v1.0.0",
     "commander": "=2.6.0",
     "daemon": "=1.1.0",
     "ip": "=1.1.3",
