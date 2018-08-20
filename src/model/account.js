@@ -3,7 +3,7 @@ module.exports = {
   tableFields: [
     { name: 'address', type: 'String', length: 50, primary_key: true, not_null: true },
     { name: 'name', type: 'String', length: 20, unique: true },
-    { name: 'xas', type: 'BigInt', default: 0 },
+    { name: 'kmc', type: 'BigInt', default: 0 },
     { name: 'publicKey', type: 'String', length: 64 },
     { name: 'secondPublicKey', type: 'String', length: 64 },
     { name: 'isLocked', type: 'Number', default: 0 },

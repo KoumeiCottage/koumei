@@ -71,29 +71,6 @@ module.exports = (router) => {
         offset,
         sort: { timestamp: -1 },
       })
-      const assetNames = new Set()
-      for (const t of transfers) {
-        if (t.currency !== 'XAS') {
-          assetNames.add(t.currency)
-        }
-      }
-      const assetMap = await getAssetMap(assetNames)
-      const tids = transfers.map(t => t.tid)
-      const trsMap = await getTransactionMap(tids)
-      for (const t of transfers) {
-        if (t.currency !== 'XAS') {
-          t.asset = assetMap.get(t.currency)
-        }
-        t.transaction = trsMap.get(t.tid)
-      }
-    }
-    for (const t of transfers) {
-      if (t.amount) {
-        const pos = t.amount.indexOf('.')
-        if (pos !== -1) {
-          t.amount = t.amount.slice(0, pos)
-        }
-      }
     }
     return { count, transfers }
   })
