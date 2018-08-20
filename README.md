@@ -1,10 +1,14 @@
 [![Build Status](https://travis-ci.org/AschPlatform/asch.svg?branch=master)](https://travis-ci.org/AschPlatform/asch)
-[![Author](https://img.shields.io/badge/author-@AschPlatform-blue.svg?style=flat)](http://github.com/AschPlatform) 
+[![Author](https://img.shields.io/badge/author-@AschPlatform-blue.svg?style=flat)](http://github.com/AschPlatform)
 [![License](https://img.shields.io/badge/license-MIT-yellow.svg?style=flat)](http://aschplatform.mit-license.org)
 [![Platform](https://img.shields.io/badge/platform-Linux-green.svg?style=flat)](https://github.com/AschPlatform/asch)
 - - -
 
-# Asch
+# Koumei
+
+Koumei is a decentralized prediction market platform built on asch core framework
+
+## Asch
 
 Asch system is a decentralized application platform, which is designed to lower the threshold for developers, such as using JavaScript as develop language, supporting relational database to save transaction data, and making DAPP development be similar with traditional Web application. It is sure that these characteristics are very attractive to developers and SMEs. The ecosystem of the whole platform cannot be improved until developers make a huge progress on productivity. Also, Asch platform is designed to be open for various fields, not limited to some particular parts such as finance, file storage, or copyright proof. It provides underlying and abstract API which can be combined freely to create different types of applications. In consensus mechanism, Asch inherits and enhances DPOS algorithm, by which the possibility of forks and risk of duplicate payments would be significantly reduced. Furthermore, Asch sidechain mode not only can mitigate the pressure of blockchain expansion, but also make DAPP more flexible and personal. Asch system, as a proactive, low-cost and full stack solution, will surely be a next generation incubator of decentralized applications.
 
@@ -37,7 +41,7 @@ sudo apt-get install libtool libtool-bin -y
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
 # This loads nvm
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" 
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Install node and npm for current user.
@@ -65,7 +69,7 @@ root@e149b6732a48:/# cd /data/asch && ./aschd start
 Asch server started as daemon ...
 ```
 
-## Run 
+## Run
 
 ```
 cd asch && node app.js
@@ -101,12 +105,12 @@ node app.js --help
 
 ## Default localnet genesis account
 
-This is the genesis account of localnet and one hundred million XAS in it.  
+This is the genesis account of localnet and one hundred million XAS in it.
 ```js
 {
   "address": "ABuH9VHV3cFi9UKzcHXGMPGnSC4QqT2cZ5",
   "publicKey": "116025d5664ce153b02c69349798ab66144edd2a395e822b13587780ac9c9c09",
-  "secret": "stone elephant caught wrong spend traffic success fetch inside blush virtual element" // password  
+  "secret": "stone elephant caught wrong spend traffic success fetch inside blush virtual element" // password
 }
 ```
 
