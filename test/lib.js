@@ -13,9 +13,9 @@ const api = supertest(`${baseUrl}/api`)
 const peer = supertest(`${baseUrl}/peer`)
 
 const GENESIS_ACCOUNT = {
-  address: 'ABuH9VHV3cFi9UKzcHXGMPGnSC4QqT2cZ5',
-  publicKey: '116025d5664ce153b02c69349798ab66144edd2a395e822b13587780ac9c9c09',
-  secret: 'stone elephant caught wrong spend traffic success fetch inside blush virtual element',
+  address: 'APduXEoKgt4gFsf4AmxgWfENDPngKcCZk1',
+  publicKey: '22b0416fef23b74df5474b8b231a843746e912466978db5c008fbc2ce36662bc',
+  secret: 'sunny honey minute gym decide paper sting winner warrior monitor maid sail',
 }
 
 function genNormalAccount(password) {
