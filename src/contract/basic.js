@@ -46,7 +46,7 @@ module.exports = {
     amount = Number(amount)
     const sender = this.sender
     const senderId = sender.address
-    if (this.block.height > 0 && sender.xas < amount) return 'Insufficient balance'
+    if (this.block.height > 0 && sender.kmc < amount) return 'Insufficient balance'
 
     let recipientAccount
     // Validate recipient is valid address
@@ -54,20 +54,20 @@ module.exports = {
                       app.util.address.isGroupAddress(recipient))) {
       recipientAccount = await app.sdb.load('Account', recipient)
       if (recipientAccount) {
-        app.sdb.increase('Account', { xas: amount }, { address: recipientAccount.address })
+        app.sdb.increase('Account', { kmc: amount }, { address: recipientAccount.address })
       } else {
         recipientAccount = app.sdb.create('Account', {
           address: recipient,
-          xas: amount,
+          kmc: amount,
           name: null,
         })
       }
     } else {
       recipientAccount = await app.sdb.load('Account', { name: recipient })
       if (!recipientAccount) return 'Recipient name not exist'
-      app.sdb.increase('Account', { xas: amount }, { address: recipientAccount.address })
+      app.sdb.increase('Account', { kmc: amount }, { address: recipientAccount.address })
     }
-    app.sdb.increase('Account', { xas: -amount }, { address: sender.address })
+    app.sdb.increase('Account', { kmc: -amount }, { address: sender.address })
 
     app.sdb.create('Transfer', {
       tid: this.trs.id,
@@ -123,7 +123,7 @@ module.exports = {
     const MIN_LOCK_HEIGHT = 8640 * 30
     const sender = this.sender
     if (sender.isAgent) return 'Agent account cannot lock'
-    if (sender.xas - 100000000 < amount) return 'Insufficient balance'
+    if (sender.kmc - 100000000 < amount) return 'Insufficient balance'
     if (sender.isLocked) {
       if (height !== 0
         && height < (Math.max(this.block.height, sender.lockHeight) + MIN_LOCK_HEIGHT)) {
@@ -148,7 +148,7 @@ module.exports = {
       sender.lockHeight = height
     }
     if (amount !== 0) {
-      sender.xas -= amount
+      sender.kmc -= amount
       sender.weight += amount
       app.sdb.update('Account', sender, { address: sender.address })
 
@@ -193,7 +193,7 @@ module.exports = {
     }
     sender.isLocked = 0
     sender.lockHeight = 0
-    sender.xas += sender.weight
+    sender.kmc += sender.weight
     sender.weight = 0
     app.sdb.update('Account', sender, { address: senderId })
 
@@ -230,7 +230,7 @@ module.exports = {
       app.sdb.create('Account', {
         address,
         name,
-        xas: 0,
+        kmc: 0,
       })
     }
     app.sdb.create('Group', {

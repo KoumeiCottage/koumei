@@ -18,7 +18,7 @@ module.exports = {
 
     const bignum = app.util.bignumber
     let total = bignum(margin).mul(Math.log(results.length).toFixed(constants.MAX_DIGITS_PRECISION) * Math.pow(10, constants.MAX_DIGITS_PRECISION)).toString()
-    let balance = this.sender.xas
+    let balance = this.sender.kmc
     app.logger.debug('--------------------------balance,balance_type,total,total_type:', balance, typeof (balance), total, typeof (total))
     if (bignum(balance).lt(total)) return 'Insufficient balance ' + currency
 
@@ -54,7 +54,7 @@ module.exports = {
       })
     }
     // app.balances.decrease(this.trs.senderId, currency, total)
-    app.sdb.increase('Account', { xas: -1 * Number(total) }, { address: this.trs.senderId })
+    app.sdb.increase('Account', { kmc: -1 * Number(total) }, { address: this.trs.senderId })
   },
   trade: async function (mid, share, choice) {
     let market = await app.sdb.findOne('Market', { condition: { id: mid } })
@@ -90,7 +90,7 @@ module.exports = {
     let c2 = bignum(market.margin).mul(Math.log(v2).toFixed(constants.MAX_DIGITS_PRECISION))
     let amount = (bignum(c2).sub(c1)).mul(Math.pow(10, constants.MAX_DIGITS_PRECISION)).toString()
     app.logger.debug('amount is ', amount)
-    if (bignum(this.sender.xas).lt(amount)) return 'Insufficient balance'
+    if (bignum(this.sender.kmc).lt(amount)) return 'Insufficient balance'
 
     app.sdb.create('Trade', {
       mid: mid,
@@ -116,10 +116,10 @@ module.exports = {
     app.sdb.increase('Result', { tradingTimes: 1 }, { mid: mid, choice: choice })
     if (Number(amount) > 0) {
       // app.balances.decrease(this.trs.senderId, market.currency, amount)
-      app.sdb.increase('Account', { xas: -1 * Number(amount) }, { address: this.trs.senderId })
+      app.sdb.increase('Account', { kmc: -1 * Number(amount) }, { address: this.trs.senderId })
     } else {
       // app.balances.increase(this.trs.senderId, market.currency, Math.abs(amount))
-      app.sdb.increase('Account', { xas: Math.abs(amount) }, { address: this.trs.senderId })
+      app.sdb.increase('Account', { kmc: Math.abs(amount) }, { address: this.trs.senderId })
     }
   },
   settle: async function (mid) {
@@ -177,7 +177,7 @@ module.exports = {
         share: myShare.share
       })
       // app.balances.increase(senderId, market.currency, amount)
-      app.sdb.increase('Account', { xas: Number(amount)}, { address: senderId })
+      app.sdb.increase('Account', { kmc: Number(amount)}, { address: senderId })
     } else {
       if (market.initiator !== senderId) return 'Have no valid shares of correct choice in this market!'
       initiator = 1
@@ -192,7 +192,7 @@ module.exports = {
         share: 0
       })
       // app.balances.increase(senderId, market.currency, amount)
-      app.sdb.increase('Account', { xas: Number(amount)}, { address: senderId })
+      app.sdb.increase('Account', { kmc: Number(amount)}, { address: senderId })
     }
   },
   reveal: async function (mid, choice) {
