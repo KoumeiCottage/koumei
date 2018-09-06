@@ -5,7 +5,7 @@ const randomstring = require('randomstring')
 const ip = require('ip')
 const daemon = require('daemon')
 const tracer = require('tracer')
-const asch = require('asch-core')
+const asch = require('koumei-core')
 
 const Application = asch.Application
 
