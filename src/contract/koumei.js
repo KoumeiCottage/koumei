@@ -60,7 +60,7 @@ module.exports = {
     let market = await app.sdb.findOne('Market', { condition: { id: mid } })
     if (!market) return 'Market not found'
     if (market.state > MARKET_STATE.ONGOING) return 'Trade already closed'
-    if (this.lastBlock.timestamp > market.endTimestamp) return 'Out of date,Trade already closed'
+    if (modules.blocks.getLastBlock().timestamp > market.endTimestamp) return 'Out of date,Trade already closed'
 
     let shareCond = { mid: mid, address: this.trs.senderId, choice: choice }
     let shareItem = app.sdb.get('Share', shareCond)
@@ -129,7 +129,7 @@ module.exports = {
 
     let market = await app.sdb.findOne('Market', { condition: { id: mid } })
     if (!market) return { success: false, error: 'Market not found' }
-    if (market.state < MARKET_STATE.FINISHED) return { success: false, error: 'Market not finished' }
+    if (market.state < MARKET_STATE.FINISHED) return 'Market not finished'
 
     let correctChoice = market.verdictChoice >= 0 ? market.verdictChoice : market.revealChoice
     if (correctChoice < 0) return { success: false, error: 'Invalid market state or final result' }
@@ -199,7 +199,7 @@ module.exports = {
     let market = await app.sdb.findOne('Market', { condition: { id: mid } })
     if (!market) return 'Market not found'
     if (this.trs.senderId !== market.initiator) return 'Permission denied'
-    if (this.lastBlock.timestamp <= market.endTimestamp) return 'Time not arrived'
+    if (modules.blocks.getLastBlock().timestamp <= market.endTimestamp) return 'Time not arrived'
     // if (this.block.height > market.endHeight + app.config.revealBlockPeriod) return 'Out of date'
     if (market.state !== MARKET_STATE.REVEALING) return 'Incorrect market state'
 
@@ -288,7 +288,7 @@ module.exports = {
 
     if (state === MARKET_STATE.REVEALING) {
       if (market.state !== MARKET_STATE.ONGOING) return 'State not correct'
-      if (this.lastBlock.timestamp < market.endTimestamp) return 'Time not arrived'
+      if (modules.blocks.getLastBlock().timestamp < market.endTimestamp) return 'Time not arrived'
     } else if (state === MARKET_STATE.FINISHED) {
       if (market.state !== MARKET_STATE.ANNOUNCING) return 'State not correct'
       if (this.lastBlock.height <= market.revealHeight + app.config.announceBlockPeriod) return 'Time not arrived'
