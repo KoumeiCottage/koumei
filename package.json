@@ -8,10 +8,12 @@
   },
   "author": "koumei.io",
   "dependencies": {
-    "koumei-core": "https://github.com/KoumeiCottage/koumei-core/tarball/v1.0.0",
+    "better-sqlite3": "=5.0.1",
     "commander": "=2.6.0",
     "daemon": "=1.1.0",
     "ip": "=1.1.3",
+    "koumei-core": "https://github.com/KoumeiCottage/koumei-core/tarball/v1.0.0",
+    "leveldown": "=4.0.1",
     "randomstring": "=1.1.5",
     "tracer": "=0.8.12"
   },
